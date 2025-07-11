@@ -60,27 +60,29 @@ def transcribe_audio(video_path, model_name="large"):
     logger.info("Transcription complete.")
     return transcript
 
-def get_client(client_name, client_token=None):
+def get_client(client_name, client_token, client_model):
     if client_name == "openai":
-        return OpenAIClient(api_key=client_token)
+        return OpenAIClient(api_key=client_token, model=client_model)
     elif client_name == "claude":
-        return ClaudeClient(api_key=client_token)
+        return ClaudeClient(api_key=client_token, model=client_model)
     elif client_name == "gemini":
-        return GeminiClient(api_key=client_token)
+        return GeminiClient(api_key=client_token, model=client_model)
     elif client_name == "local":
-        return LocalLLMClient(api_key=client_token)
+        return LocalLLMClient(model=client_model)
     else:
-        raise ValueError(f"Unsupported client: {client_name}")
+        raise ValueError(f"Unknown client: {client_name}")
 
-def process_video(input_file, output, fps, model, fps_smart_mode, transcribe, client_name, client_token):
+
+def process_video(input_file, output, fps, whisper_model, fps_smart_mode, transcribe, client_name, client_token, client_model):
     logger.info(f"Processing: {input_file}")
     logger.info(f"Output: {output}")
-    logger.info(f"Whisper Model: {model}")
+    logger.info(f"Whisper Model: {whisper_model}")
     logger.info(f"Transcribe only: {transcribe}")
     logger.info(f"Client: {client_name}")
+    logger.info(f"Client Model: {client_model}")
 
     # Initialize AI client
-    client = get_client(client_name, client_token)
+    client = get_client(client_name, client_token, client_model)
 
     # Step 1: Extract frames
     frames_dir = "frames"
@@ -95,7 +97,7 @@ def process_video(input_file, output, fps, model, fps_smart_mode, transcribe, cl
         frame_texts[frame_file] = ocr_text
 
     # Step 3: Transcribe audio
-    transcript = transcribe_audio(input_file, model)
+    transcript = transcribe_audio(input_file, whisper_model)
 
     if transcribe:
         with open(output, "w") as f:
@@ -116,3 +118,4 @@ def process_video(input_file, output, fps, model, fps_smart_mode, transcribe, cl
             f.write(summary + "\n\n")
 
     logger.info(f"How-To Markdown file generated at: {output}")
+

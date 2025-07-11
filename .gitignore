@@ -6,6 +6,9 @@ __pycache__/
 # Frames Directory
 frames/
 
+# howto.md
+howto.md
+
 # C extensions
 *.so
 
