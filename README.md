@@ -1,7 +1,6 @@
-# frameflow
-Transcribe technical videos into structured How-To documents with visual frame context.
-
 # 🖼️ FrameFlow
+
+`Transcribe technical videos into structured How-To documents with visual frame context.`
 
 **FrameFlow** is a CLI tool to extract **technical documentation from video recordings** using:
 
