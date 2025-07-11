@@ -56,13 +56,36 @@ make install
 
 ```bash
 frameflow --input-file /path/to/video.mp4 --client openai
-Additional arguments
-Flag	Description
---fps	Set frames per second for extraction
---fps-smart-mode	Enable smart FPS detection
---transcribe	Generate only audio transcription
---client-token	API token for selected client
---log-level	Set log verbosity (DEBUG, INFO, WARNING, ERROR)
+```
+
+```bash
+> frameflow --help
+usage: frameflow [-h] [--input-file INPUT_FILE] [--output OUTPUT] [--fps FPS] [--fps-smart-mode] [--whisper-model WHISPER_MODEL]
+                 [--client {openai,local,gemini,claude}] [--client-model CLIENT_MODEL] [--client-token CLIENT_TOKEN] [--transcribe]
+                 [--log-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [--list-available-models]
+
+FrameFlow: Transcribe technical videos into visual How-To documents.
+
+options:
+  -h, --help            show this help message and exit
+  --input-file INPUT_FILE
+                        Path to input video file
+  --output OUTPUT       Output Markdown file
+  --fps FPS             Frame extraction FPS. If not set, uses scene change.
+  --fps-smart-mode      Enable smart FPS extraction based on video length.
+  --whisper-model WHISPER_MODEL
+                        Whisper model size (tiny, base, small, medium, large)
+  --client {openai,local,gemini,claude}
+                        AI client to use for summarization
+  --client-model CLIENT_MODEL
+                        AI model name for the selected client
+  --client-token CLIENT_TOKEN
+                        API token for the AI client (overrides environment variable if provided)
+  --transcribe          If set, generate transcript only.
+  --log-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
+                        Set log verbosity level (default: INFO)
+  --list-available-models
+                        List available models for the selected client
 ```
 
 ---
