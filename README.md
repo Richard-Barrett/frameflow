@@ -1,4 +1,4 @@
-# 🖼️ FrameFlow
+# ![Frameflow](https://github.com/Richard-Barrett/frameflow/blob/main/images/frameflow.png)
 
 `Transcribe technical videos into structured How-To documents with visual frame context.`
 
